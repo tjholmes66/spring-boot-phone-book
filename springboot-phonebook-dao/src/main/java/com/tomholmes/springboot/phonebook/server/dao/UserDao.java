@@ -1,30 +1,34 @@
-package com.opensource.products.phonebook.server.dao;
+package com.tomholmes.springboot.phonebook.server.dao;
 
-import java.util.List;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-import com.opensource.products.phonebook.server.domain.UserEntity;
+import com.tomholmes.springboot.phonebook.server.domain.UserEntity;
 
-public interface UserDao
+@Repository("userDao")
+public interface UserDao extends CrudRepository<UserEntity, Long>
 {
+    /*
     public UserEntity createUserEntity(UserEntity userEntity);
-
+    
     public UserEntity updateUserEntity(UserEntity userEntity);
-
+    
     public void deleteUserEntity(long userId);
-
+    
     public void deleteUserEntity(UserEntity user);
-
+    
     public List<UserEntity> getAllUserEntitys();
-
+    
     // Retrieve
     public UserEntity getUserEntity(long id);
-
+    
     public List<UserEntity> getUsersEntity(UserEntity exampleEntity);
-
+    
     public List<UserEntity> getUserEntityByLogin(String username, String password);
-
+    
     List<UserEntity> getUserEntityByEmail(String email);
-
+    
     List<UserEntity> getUserEntityByUsername(String username);
+    */
 
 }

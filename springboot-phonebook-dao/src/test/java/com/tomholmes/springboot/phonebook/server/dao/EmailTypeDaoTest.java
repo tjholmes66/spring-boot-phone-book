@@ -1,34 +1,19 @@
-package com.opensource.products.phonebook.server.dao;
+package com.tomholmes.springboot.phonebook.server.dao;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.opensource.products.phonebook.server.domain.EmailTypeEntity;
+import com.tomholmes.springboot.phonebook.server.domain.EmailTypeEntity;
 
 public class EmailTypeDaoTest extends BaseDaoTests
 {
-
-    final Logger logger = LoggerFactory.getLogger(EmailTypeDaoTest.class);
-
     @Autowired
     private EmailTypeDao emailTypeDao;
-
-    protected void setUp() throws Exception
-    {
-        System.out.println("setup: Loading application context");
-        System.out.println("setup: Done loading application context");
-    }
-
-    protected void tearDown() throws Exception
-    {
-        super.tearDown();
-        System.out.println("tearDown: START");
-        System.out.println("tearDown: FINISH");
-    }
 
     @Test
     public void testEmailTypeSave()
@@ -46,7 +31,7 @@ public class EmailTypeDaoTest extends BaseDaoTests
         System.out.println("testEmailTypeSave: " + emailTypeName + " " + emailTypeDescription);
         // ***************************************************************
         System.out.println("testEmailTypeSave: START: CREATE");
-        emailType = emailTypeDao.saveEmailTypeEntity(emailType);
+        emailType = emailTypeDao.save(emailType);
         assertNotNull(emailType);
         System.out.println("testEmailTypeSave: FINISH: CREATE");
         // =================================================================================
@@ -68,7 +53,7 @@ public class EmailTypeDaoTest extends BaseDaoTests
         System.out.println("testEmailTypeUpdate: " + emailTypeName + " " + emailTypeDescription);
         // ***************************************************************
         System.out.println("testEmailTypeUpdate: START: CREATE");
-        emailType = emailTypeDao.saveEmailTypeEntity(emailType);
+        emailType = emailTypeDao.save(emailType);
         assertNotNull(emailType);
         assertEquals(emailActive, emailType.isActive());
         assertEquals(emailTypeDescription, emailType.getDescription());
@@ -84,15 +69,14 @@ public class EmailTypeDaoTest extends BaseDaoTests
         // =================================================================================
         // ***************************************************************
         System.out.println("testEmailTypeRetrieve: START: CREATE");
-        List<EmailTypeEntity> emailTypes = emailTypeDao.getAllEmailTypeEntitys();
+        List<EmailTypeEntity> emailTypes = (List<EmailTypeEntity>) emailTypeDao.findAll();
         assertNotNull(emailTypes);
         for (EmailTypeEntity emailType : emailTypes)
         {
             assertNotNull(emailType.getId());
             assertNotNull(emailType.isActive());
             assertNotNull(emailType.getDescription());
-            System.out.println("testEmailTypeRetrieve: emailType=" + emailType.getId() + " " + emailType.isActive()
-                + " " + emailType.getDescription());
+            System.out.println("testEmailTypeRetrieve: emailType=" + emailType.getId() + " " + emailType.isActive() + " " + emailType.getDescription());
         }
         System.out.println("testEmailTypeRetrieve: FINISH: CREATE");
         // =================================================================================
@@ -106,12 +90,11 @@ public class EmailTypeDaoTest extends BaseDaoTests
         // =================================================================================
         // ***************************************************************
         System.out.println("testEmailTypeRetrieveById: START: CREATE");
-        EmailTypeEntity emailType = emailTypeDao.getEmailTypeEntity(1);
+        EmailTypeEntity emailType = emailTypeDao.findOne(1L);
         assertNotNull(emailType.getId());
         assertNotNull(emailType.isActive());
         assertNotNull(emailType.getDescription());
-        System.out.println("testEmailTypeRetrieveById: emailType=" + emailType.getId() + " " + emailType.isActive()
-            + " " + emailType.getDescription());
+        System.out.println("testEmailTypeRetrieveById: emailType=" + emailType.getId() + " " + emailType.isActive() + " " + emailType.getDescription());
         System.out.println("testEmailTypeRetrieveById: FINISH: CREATE");
         // =================================================================================
     }
@@ -125,10 +108,10 @@ public class EmailTypeDaoTest extends BaseDaoTests
         EmailTypeEntity emailTypeGet;
         // =================================================================================
         // ***************************************************************
-        int id = 10;
-        emailType = emailTypeDao.getEmailTypeEntity(id);
-        emailTypeDao.deleteEmailTypeEntity(emailType);
-        emailTypeGet = emailTypeDao.getEmailTypeEntity(id);
+        long id = 10;
+        emailType = emailTypeDao.findOne(id);
+        emailTypeDao.delete(emailType);
+        emailTypeGet = emailTypeDao.findOne(id);
         assertEquals(null, emailTypeGet);
         // ***************************************************************
         System.out.println("testEmailTypeDelete: FINISH: CREATE");

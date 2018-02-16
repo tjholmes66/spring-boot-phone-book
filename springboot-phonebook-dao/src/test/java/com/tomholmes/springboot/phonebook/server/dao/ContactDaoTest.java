@@ -1,31 +1,26 @@
-package com.opensource.products.phonebook.server.dao;
+package com.tomholmes.springboot.phonebook.server.dao;
 
-import java.text.SimpleDateFormat;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.opensource.products.phonebook.server.domain.ContactEmailEntity;
-import com.opensource.products.phonebook.server.domain.ContactEntity;
-import com.opensource.products.phonebook.server.domain.ContactPhoneEntity;
-import com.opensource.products.phonebook.server.domain.EmailTypeEntity;
-import com.opensource.products.phonebook.server.domain.PhoneTypeEntity;
-import com.opensource.products.phonebook.server.domain.UserEntity;
+import com.tomholmes.springboot.phonebook.server.domain.ContactEmailEntity;
+import com.tomholmes.springboot.phonebook.server.domain.ContactEntity;
+import com.tomholmes.springboot.phonebook.server.domain.ContactPhoneEntity;
+import com.tomholmes.springboot.phonebook.server.domain.EmailTypeEntity;
+import com.tomholmes.springboot.phonebook.server.domain.PhoneTypeEntity;
+import com.tomholmes.springboot.phonebook.server.domain.UserEntity;
 
 public class ContactDaoTest extends BaseDaoTests
 {
-
-    final Logger logger = LoggerFactory.getLogger(ContactDaoTest.class);
-
-    private SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-
     @Autowired
-    private ContactDao contactDao;
+    private ContactDao contactDao; // repository
 
     private long _id = 2;
     private boolean _active = true;
@@ -45,23 +40,10 @@ public class ContactDaoTest extends BaseDaoTests
     private String _state = "MA";
     private String _zip = "12345-1234";
 
-    protected void setUp() throws Exception
-    {
-        System.out.println("setup: Loading application context");
-        System.out.println("setup: Done loading application context");
-    }
-
-    protected void tearDown() throws Exception
-    {
-        super.tearDown();
-        System.out.println("tearDown: START");
-        System.out.println("tearDown: FINISH");
-    }
-
     private HashSet<ContactEmailEntity> createEmails(ContactEntity contact)
     {
         HashSet<ContactEmailEntity> emails = new HashSet<ContactEmailEntity>();
-        logger.debug("createEmails: START");
+        System.out.println("createEmails: START");
         ContactEmailEntity contactEmail = null;
         // ============================================================
         String email1 = "tom1@tomholmes1.net";
@@ -94,14 +76,14 @@ public class ContactDaoTest extends BaseDaoTests
         contactEmail.setEmailType(emailType3);
         emails.add(contactEmail);
         // ============================================================
-        logger.debug("createEmails: FINISH");
+        System.out.println("createEmails: FINISH");
         return emails;
     }
 
     private HashSet<ContactPhoneEntity> createPhones(ContactEntity contactEntity)
     {
         HashSet<ContactPhoneEntity> phones = new HashSet<ContactPhoneEntity>();
-        logger.debug("createPhones: START");
+        System.out.println("createPhones: START");
         ContactPhoneEntity contactPhone = null;
         // ============================================================
         PhoneTypeEntity phoneType1 = new PhoneTypeEntity();
@@ -134,26 +116,28 @@ public class ContactDaoTest extends BaseDaoTests
         contactPhone.setPhoneType(phoneType3);
         phones.add(contactPhone);
         // ============================================================
-        logger.debug("createEmails: FINISH");
+        System.out.println("createEmails: FINISH");
         return phones;
     }
 
     // @Test
+    /*
     public void testContactFetchByUser() throws Exception
     {
         System.out.println("testContactFetchByUser: START");
         UserEntity user = new UserEntity();
         user.setUserId(1);
-
+    
         List<ContactEntity> contacts = contactDao.getContactEntityByUser(user);
         if (contacts != null)
         {
             System.out.println("testContactFetchByUser: size=" + contacts.size());
         }
         assertNotNull(contacts);
-
+    
         System.out.println("testContactFetchByUser: FINISH");
     }
+    */
 
     @Test
     public void testContactCreate() throws Exception
@@ -185,7 +169,7 @@ public class ContactDaoTest extends BaseDaoTests
         System.out.println("testContactCreate: " + contact.toString());
         // ***************************************************************
         System.out.println("testContactCreate: START: CREATE");
-        contact = contactDao.createContactEntity(contact);
+        contact = contactDao.save(contact);
         assertNotNull(contact);
         System.out.println("testContactCreate: FINISH: CREATE");
         // =================================================================================
@@ -199,7 +183,7 @@ public class ContactDaoTest extends BaseDaoTests
         // =================================================================================
         // ***************************************************************
         System.out.println("testContactRetrieve: START: CREATE");
-        List<ContactEntity> contacts = contactDao.getAllContactEntitys();
+        List<ContactEntity> contacts = (List<ContactEntity>) contactDao.findAll();
         assertNotNull(contacts);
         for (ContactEntity contact : contacts)
         {
@@ -219,7 +203,7 @@ public class ContactDaoTest extends BaseDaoTests
 // assertEquals(contact.getSuffix(),suffix);
 // assertEquals(contact.getUsername(),username);
 // assertEquals(contact.getZip(),zip);
-            // ************************************************************
+// ************************************************************
             System.out.println("testContactRetrieve: contact=" + contact.toString());
         }
         System.out.println("testContactRetrieve: FINISH: CREATE");
@@ -243,7 +227,7 @@ public class ContactDaoTest extends BaseDaoTests
         // =================================================================================
         // ***************************************************************
         System.out.println("testContactRetrieveById: START: CREATE");
-        ContactEntity contact = contactDao.getContactEntity(contactId);
+        ContactEntity contact = contactDao.findOne(contactId);
         assertNotNull(contact.getContactId());
         // ************************************************************
         assertEquals(contact.getAddress1(), address1);
@@ -279,10 +263,10 @@ public class ContactDaoTest extends BaseDaoTests
         // assertNotNull(contactEntity);
         // System.out.println("testContactDelete: " + contactEntity.toString());
         // =================================================================================
-        contactDao.deleteContactEntity(contactId);
+        contactDao.delete(contactId);
         System.out.println("testContactDelete: contact deleted");
         // =================================================================================
-        ContactEntity contact = contactDao.getContactEntity(contactId);
+        ContactEntity contact = contactDao.findOne(contactId);
         assertEquals(contact, null);
         // ***************************************************************
         System.out.println("testContactDelete: FINISH");
@@ -352,7 +336,7 @@ public class ContactDaoTest extends BaseDaoTests
         String updatePassword = "updated_pwd4";
         String updateUsername = "updated_username4";
         // =================================================================================
-        ContactEntity contact = contactDao.getContactEntity(contactId);
+        ContactEntity contact = contactDao.findOne(contactId);
 // assertEquals(contact.getAddress1(),address1);
 // assertEquals(contact.getAddress2(),address2);
 // assertEquals(contact.getCity(),city);
@@ -374,7 +358,7 @@ public class ContactDaoTest extends BaseDaoTests
         contact.setLastName(updateLastName);
         // ***************************************************************
 
-        contact = contactDao.updateContactEntity(contact);
+        contact = contactDao.save(contact);
         assertNotNull(contact);
         assertEquals(contact.getCity(), updateCity);
         assertEquals(contact.getFirstName(), updateFirstName);

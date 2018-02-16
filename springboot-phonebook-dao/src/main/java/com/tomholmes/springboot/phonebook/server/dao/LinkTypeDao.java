@@ -1,23 +1,27 @@
-package com.opensource.products.phonebook.server.dao;
+package com.tomholmes.springboot.phonebook.server.dao;
 
-import java.util.List;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-import com.opensource.products.phonebook.server.domain.LinkTypeEntity;
+import com.tomholmes.springboot.phonebook.server.domain.LinkTypeEntity;
 
-public interface LinkTypeDao
+@Repository("linkTypeDao")
+public interface LinkTypeDao extends CrudRepository<LinkTypeEntity, Long>
 {
 
+    /*
     public LinkTypeEntity saveLinkTypeEntity(LinkTypeEntity linkType);
-
+    
     public void deleteLinkTypeEntity(Long linkTypeId);
-
+    
     public void deleteLinkTypeEntity(LinkTypeEntity linkType);
-
+    
     public List<LinkTypeEntity> getAllLinkTypeEntitys();
-
+    
     // Retrieve
     public LinkTypeEntity getLinkTypeEntity(long id);
-
+    
     public List<LinkTypeEntity> getLinkTypeEntity(LinkTypeEntity exampleEntity);
+    */
 
 }

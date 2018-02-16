@@ -1,23 +1,23 @@
-package com.opensource.products.phonebook.server.dao;
+package com.tomholmes.springboot.phonebook.server.dao;
 
-import java.text.SimpleDateFormat;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
-import com.opensource.products.phonebook.server.domain.ContactEmailEntity;
-import com.opensource.products.phonebook.server.domain.ContactEntity;
-import com.opensource.products.phonebook.server.domain.EmailTypeEntity;
+import com.tomholmes.springboot.phonebook.server.domain.ContactEmailEntity;
+import com.tomholmes.springboot.phonebook.server.domain.ContactEntity;
 
 public class ContactEmailDaoTest extends BaseDaoTests
 {
-    final Logger logger = LoggerFactory.getLogger(ContactEmailDaoTest.class);
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+    @Autowired
+    private TestEntityManager entityManager;
 
     @Autowired
     private ContactDao contactDao;
@@ -47,44 +47,33 @@ public class ContactEmailDaoTest extends BaseDaoTests
 
     private ContactEntity contact;
 
-    protected void setUp() throws Exception
-    {
-        System.out.println("setup: Loading application context");
-        System.out.println("setup: Done loading application context");
-    }
-
-    protected void tearDown() throws Exception
-    {
-        super.tearDown();
-        System.out.println("tearDown: START");
-        System.out.println("tearDown: FINISH");
-        contact = null;
-    }
-
+    /*
     @Test
     public void testContactEmailFetchByContact() throws Exception
     {
         long contactId = 0; // should be no results for contactId=4
         System.out.println("testContactEmailFetchByContact: START");
-
+    
         List<ContactEmailEntity> contactEmails = contactEmailDao.getContactEmailEntityByContactId(contactId);
         if (contactEmails != null)
         {
             System.out.println("testContactEmailFetchByContact: size=" + contactEmails.size());
         }
         assertEquals(0, contactEmails.size());
-
+    
         System.out.println("testContactEmailFetchByContact: FINISH");
     }
+    */
 
     // @Test
+    /*
     public void testCreate() throws Exception
     {
         System.out.println("testCreate: START");
         // =================================================================================
         EmailTypeEntity emailType = new EmailTypeEntity();
         emailType.setId(emailTypeId);
-        contact = contactDao.getContactEntity(id);
+        contact = contactDao.findOne(id);
         // =================================================================================
         ContactEmailEntity contactEmail = new ContactEmailEntity();
         // contactEmail.setId(id);
@@ -102,6 +91,7 @@ public class ContactEmailDaoTest extends BaseDaoTests
         contactEmailDao.deleteContactEmailEntity(contactEmail);
         // =================================================================================
     }
+    */
 
     @Test
     public void testContactRetrieve()
@@ -111,7 +101,7 @@ public class ContactEmailDaoTest extends BaseDaoTests
         // =================================================================================
         // ***************************************************************
         System.out.println("testContactRetrieve: START: CREATE");
-        List<ContactEmailEntity> contactEmails = contactEmailDao.getAllContactEmailEntitys();
+        List<ContactEmailEntity> contactEmails = (List<ContactEmailEntity>) contactEmailDao.findAll();
         assertNotNull(contactEmails);
         for (ContactEmailEntity contactEmail : contactEmails)
         {
@@ -136,7 +126,7 @@ public class ContactEmailDaoTest extends BaseDaoTests
         // =================================================================================
         // ***************************************************************
         System.out.println("testContactRetrieveById: START: CREATE");
-        ContactEmailEntity contactEmail = contactEmailDao.getContactEmailEntity(id);
+        ContactEmailEntity contactEmail = contactEmailDao.findOne(id);
         assertNotNull(contactEmail.getEmailId());
         // ************************************************************
         assertNotNull(contactEmail.getEmailId());
@@ -159,10 +149,10 @@ public class ContactEmailDaoTest extends BaseDaoTests
         ContactEmailEntity contactEmailGet;
         // =================================================================================
         // ***************************************************************
-        int id = 10;
-        contactEmail = contactEmailDao.getContactEmailEntity(id);
-        contactEmailDao.deleteContactEmailEntity(contactEmail);
-        contactEmailGet = contactEmailDao.getContactEmailEntity(id);
+        long id = 10;
+        contactEmail = contactEmailDao.findOne(id);
+        contactEmailDao.delete(contactEmail);
+        contactEmailGet = contactEmailDao.findOne(id);
         assertEquals(null, contactEmailGet);
         // ***************************************************************
         System.out.println("testContactDelete: FINISH: CREATE");
@@ -231,7 +221,7 @@ public class ContactEmailDaoTest extends BaseDaoTests
         String updatePassword = "updated_pwd";
         String updateUsername = "updated_username";
         // =================================================================================
-        ContactEmailEntity contactEmail = contactEmailDao.getContactEmailEntity(id);
+        ContactEmailEntity contactEmail = contactEmailDao.findOne(id);
 // assertEquals(contactEmail.getAddress1(),address1);
 // assertEquals(contactEmail.getAddress2(),address2);
 // assertEquals(contactEmail.getCity(),city);
@@ -253,9 +243,9 @@ public class ContactEmailDaoTest extends BaseDaoTests
 // contactEmail.setLastName(updateLastName);
 // contactEmail.setPassword(updatePassword);
 // contactEmail.setUsername(updateUsername);
-        // ***************************************************************
+// ***************************************************************
         System.out.println("testContactUpdate: START: CREATE");
-        contactEmail = contactEmailDao.saveContactEmailEntity(contactEmail);
+        contactEmail = contactEmailDao.save(contactEmail);
         assertNotNull(contactEmail);
 // assertEquals(contactEmail.getCity(),updateCity);
 // assertEquals(contactEmail.getFirstName(),updateFirstName);

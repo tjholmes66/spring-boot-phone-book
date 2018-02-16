@@ -1,34 +1,19 @@
-package com.opensource.products.phonebook.server.dao;
+package com.tomholmes.springboot.phonebook.server.dao;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.opensource.products.phonebook.server.domain.PhoneTypeEntity;
+import com.tomholmes.springboot.phonebook.server.domain.PhoneTypeEntity;
 
 public class PhoneTypeDaoTest extends BaseDaoTests
 {
-
-    final Logger logger = LoggerFactory.getLogger(PhoneTypeDaoTest.class);
-
     @Autowired
     private PhoneTypeDao phoneTypeDao;
-
-    protected void setUp() throws Exception
-    {
-        System.out.println("setup: Loading application context");
-        System.out.println("setup: Done loading application context");
-    }
-
-    protected void tearDown() throws Exception
-    {
-        super.tearDown();
-        System.out.println("tearDown: START");
-        System.out.println("tearDown: FINISH");
-    }
 
     @Test
     public void testPhoneTypeSave()
@@ -46,7 +31,7 @@ public class PhoneTypeDaoTest extends BaseDaoTests
         System.out.println("testPhoneTypeSave: " + phoneTypeName + " " + phoneTypeDescription);
         // ***************************************************************
         System.out.println("testPhoneTypeSave: START: CREATE");
-        phoneType = phoneTypeDao.savePhoneTypeEntity(phoneType);
+        phoneType = phoneTypeDao.save(phoneType);
         assertNotNull(phoneType);
         System.out.println("testPhoneTypeSave: FINISH: CREATE");
         // =================================================================================
@@ -68,7 +53,7 @@ public class PhoneTypeDaoTest extends BaseDaoTests
         System.out.println("testPhoneTypeUpdate: " + phoneTypeName + " " + phoneTypeDescription);
         // ***************************************************************
         System.out.println("testPhoneTypeUpdate: START: CREATE");
-        phoneType = phoneTypeDao.savePhoneTypeEntity(phoneType);
+        phoneType = phoneTypeDao.save(phoneType);
         assertNotNull(phoneType);
         assertEquals(phoneActive, phoneType.isActive());
         assertEquals(phoneTypeDescription, phoneType.getDescription());
@@ -84,15 +69,14 @@ public class PhoneTypeDaoTest extends BaseDaoTests
         // =================================================================================
         // ***************************************************************
         System.out.println("testPhoneTypeRetrieve: START: CREATE");
-        List<PhoneTypeEntity> phoneTypes = phoneTypeDao.getAllPhoneTypeEntitys();
+        List<PhoneTypeEntity> phoneTypes = (List<PhoneTypeEntity>) phoneTypeDao.findAll();
         assertNotNull(phoneTypes);
         for (PhoneTypeEntity phoneType : phoneTypes)
         {
             assertNotNull(phoneType.getId());
             assertNotNull(phoneType.isActive());
             assertNotNull(phoneType.getDescription());
-            System.out.println("testPhoneTypeRetrieve: phoneType=" + phoneType.getId() + " " + phoneType.isActive()
-                + " " + phoneType.getDescription());
+            System.out.println("testPhoneTypeRetrieve: phoneType=" + phoneType.getId() + " " + phoneType.isActive() + " " + phoneType.getDescription());
         }
         System.out.println("testPhoneTypeRetrieve: FINISH: CREATE");
         // =================================================================================
@@ -106,12 +90,11 @@ public class PhoneTypeDaoTest extends BaseDaoTests
         // =================================================================================
         // ***************************************************************
         System.out.println("testPhoneTypeRetrieveById: START: CREATE");
-        PhoneTypeEntity phoneType = phoneTypeDao.getPhoneTypeEntity(1);
+        PhoneTypeEntity phoneType = phoneTypeDao.findOne(1L);
         assertNotNull(phoneType.getId());
         assertNotNull(phoneType.isActive());
         assertNotNull(phoneType.getDescription());
-        System.out.println("testPhoneTypeRetrieveById: phoneType=" + phoneType.getId() + " " + phoneType.isActive()
-            + " " + phoneType.getDescription());
+        System.out.println("testPhoneTypeRetrieveById: phoneType=" + phoneType.getId() + " " + phoneType.isActive() + " " + phoneType.getDescription());
         System.out.println("testPhoneTypeRetrieveById: FINISH: CREATE");
         // =================================================================================
     }
@@ -125,10 +108,10 @@ public class PhoneTypeDaoTest extends BaseDaoTests
         PhoneTypeEntity phoneTypeGet;
         // =================================================================================
         // ***************************************************************
-        int id = 10;
-        phoneType = phoneTypeDao.getPhoneTypeEntity(id);
-        phoneTypeDao.deletePhoneTypeEntity(phoneType);
-        phoneTypeGet = phoneTypeDao.getPhoneTypeEntity(id);
+        long id = 10;
+        phoneType = phoneTypeDao.findOne(id);
+        phoneTypeDao.delete(phoneType);
+        phoneTypeGet = phoneTypeDao.findOne(id);
         assertEquals(null, phoneTypeGet);
         // ***************************************************************
         System.out.println("testPhoneTypeDelete: FINISH: CREATE");

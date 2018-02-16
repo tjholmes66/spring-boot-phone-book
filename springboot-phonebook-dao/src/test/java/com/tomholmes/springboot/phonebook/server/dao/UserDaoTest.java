@@ -1,23 +1,19 @@
-package com.opensource.products.phonebook.server.dao;
+package com.tomholmes.springboot.phonebook.server.dao;
 
-import java.text.SimpleDateFormat;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.opensource.products.phonebook.server.domain.PositionEntity;
-import com.opensource.products.phonebook.server.domain.UserEntity;
+import com.tomholmes.springboot.phonebook.server.domain.PositionEntity;
+import com.tomholmes.springboot.phonebook.server.domain.UserEntity;
 
 public class UserDaoTest extends BaseDaoTests
 {
-    final Logger logger = LoggerFactory.getLogger(UserDaoTest.class);
-
-    private SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-
     @Autowired
     private ContactDao contactDao;
 
@@ -49,19 +45,6 @@ public class UserDaoTest extends BaseDaoTests
     private String securityQuestion2 = "What city were you born in?";
     private String securityAnswer2 = "Fall River";
 
-    protected void setUp() throws Exception
-    {
-        System.out.println("setup: Loading application context");
-        System.out.println("setup: Done loading application context");
-    }
-
-    protected void tearDown() throws Exception
-    {
-        super.tearDown();
-        System.out.println("tearDown: START");
-        System.out.println("tearDown: FINISH");
-    }
-
     @Test
     public void testUserCreate() throws Exception
     {
@@ -89,7 +72,7 @@ public class UserDaoTest extends BaseDaoTests
         System.out.println("testUserCreate: " + user.toString());
         // ***************************************************************
         System.out.println("testUserCreate: START: CREATE");
-        user = userDao.createUserEntity(user);
+        user = userDao.save(user);
         assertNotNull(user);
         System.out.println("testUserCreate: FINISH: CREATE");
         // =================================================================================
@@ -103,7 +86,7 @@ public class UserDaoTest extends BaseDaoTests
         // =================================================================================
         // ***************************************************************
         System.out.println("testUserRetrieveAll: START: CREATE");
-        List<UserEntity> users = userDao.getAllUserEntitys();
+        List<UserEntity> users = (List<UserEntity>) userDao.findAll();
         assertNotNull(users);
         for (UserEntity user : users)
         {
@@ -124,7 +107,7 @@ public class UserDaoTest extends BaseDaoTests
 // assertEquals(user.getSuffix(),suffix);
 // assertEquals(user.getUsername(),username);
 // assertEquals(user.getZip(),zip);
-            // ************************************************************
+// ************************************************************
             System.out.println("testUserRetrieveAll: user=" + user.toString());
         }
         System.out.println("testUserRetrieveAll: FINISH: CREATE");
@@ -140,7 +123,7 @@ public class UserDaoTest extends BaseDaoTests
         // =================================================================================
         // ***************************************************************
         System.out.println("testUserRetrieveById: START: CREATE");
-        UserEntity user = userDao.getUserEntity(id);
+        UserEntity user = userDao.findOne(id);
         assertNotNull(user.getUserId());
         // assertNotNull(user.isActive());
         // ************************************************************
@@ -157,6 +140,7 @@ public class UserDaoTest extends BaseDaoTests
         // =================================================================================
     }
 
+    /*
     @Test
     public void testUserRetrieveByEmail()
     {
@@ -168,14 +152,14 @@ public class UserDaoTest extends BaseDaoTests
         System.out.println("testUserRetrieveByEmail: START: CREATE");
         UserEntity exampleEntity = new UserEntity();
         exampleEntity.setEmail(email);
-
+    
         System.out.println("testUserRetrieveByEmail: START: CREATE");
         List<UserEntity> users = userDao.getUserEntityByEmail(email);
         assertNotNull(users);
         assertEquals(1, users.size());
         UserEntity user = users.get(0);
         assertNotNull(user.getUserId());
-
+    
         // ************************************************************
         assertEquals(user.getEmail(), email);
         // ************************************************************
@@ -183,7 +167,9 @@ public class UserDaoTest extends BaseDaoTests
         System.out.println("testUserRetrieveByEmail: FINISH: CREATE");
         // =================================================================================
     }
+    */
 
+    /*
     @Test
     public void testUserRetrieveByUsername()
     {
@@ -195,14 +181,14 @@ public class UserDaoTest extends BaseDaoTests
         System.out.println("testUserRetrieveByUsername: START: CREATE");
         UserEntity exampleEntity = new UserEntity();
         exampleEntity.setUsername(username);
-
+    
         System.out.println("testUserRetrieveByUsername: START: CREATE");
         List<UserEntity> users = userDao.getUserEntityByUsername(username);
         assertNotNull(users);
         assertEquals(1, users.size());
         UserEntity user = users.get(0);
         assertNotNull(user.getUserId());
-
+    
         // ************************************************************
         assertEquals(user.getUsername(), username);
         // ************************************************************
@@ -210,8 +196,10 @@ public class UserDaoTest extends BaseDaoTests
         System.out.println("testUserRetrieveByUsername: FINISH: CREATE");
         // =================================================================================
     }
+    */
 
-    // @Test
+    /*
+    @Test
     public void testUserRetrieveByExample()
     {
         System.out.println("testUserRetrieveByExample: START");
@@ -236,7 +224,9 @@ public class UserDaoTest extends BaseDaoTests
         System.out.println("testUserRetrieveByExample: FINISH: CREATE");
         // =================================================================================
     }
+    */
 
+    /*
     @Test
     public void testUserRetrieveByUsernamePassword()
     {
@@ -267,6 +257,7 @@ public class UserDaoTest extends BaseDaoTests
         System.out.println("testUserRetrieveByExample: FINISH: CREATE");
         // =================================================================================
     }
+    */
 
     // @Test
     public void testUserDelete()
@@ -274,12 +265,12 @@ public class UserDaoTest extends BaseDaoTests
         System.out.println("testUserDelete: START");
         long id = 3;
         // =================================================================================
-        UserEntity user = userDao.getUserEntity(id);
+        UserEntity user = userDao.findOne(id);
         assertNotNull(user);
         System.out.println("testUserDelete: " + user.toString());
-        userDao.deleteUserEntity(user);
+        userDao.delete(user);
         System.out.println("testUserDelete: user deleted");
-        user = userDao.getUserEntity(id);
+        user = userDao.findOne(id);
         assertEquals(user, null);
         // ***************************************************************
         System.out.println("testUserDelete: FINISH");
@@ -342,7 +333,7 @@ public class UserDaoTest extends BaseDaoTests
     {
         System.out.println("testUserUpdate: START");
         long userId = 2;
-        UserEntity userEntity = userDao.getUserEntity(userId);
+        UserEntity userEntity = userDao.findOne(userId);
         assertNotNull(userEntity);
         // =================================================================================
         String updateFirstName = "updated_fn4";
@@ -353,9 +344,9 @@ public class UserDaoTest extends BaseDaoTests
         userEntity.setLastname(updateLastName);
         userEntity.setEmail(updateEmail);
         // =================================================================================
-        userDao.updateUserEntity(userEntity);
+        userDao.save(userEntity);
         // =================================================================================
-        userEntity = userDao.getUserEntity(userId);
+        userEntity = userDao.findOne(userId);
         assertEquals(updateFirstName, userEntity.getFirstname());
         assertEquals(updateLastName, userEntity.getLastname());
         assertEquals(updateEmail, userEntity.getEmail());

@@ -1,17 +1,20 @@
-package com.opensource.products.phonebook.server.dao;
+package com.tomholmes.springboot.phonebook.server.dao;
 
-import junit.framework.TestCase;
+import java.text.SimpleDateFormat;
 
 import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations =
-{ "classpath:/spring/phonebook-dao-context.xml" })
-@Transactional
-public class BaseDaoTests extends TestCase
+@RunWith(SpringRunner.class)
+@DataJpaTest
+public class BaseDaoTests
 {
+    private SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+
+    @Autowired
+    private TestEntityManager entityManager;
 
 }

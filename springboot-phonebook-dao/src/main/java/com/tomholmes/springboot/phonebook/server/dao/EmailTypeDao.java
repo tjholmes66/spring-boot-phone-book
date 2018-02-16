@@ -1,23 +1,27 @@
-package com.opensource.products.phonebook.server.dao;
+package com.tomholmes.springboot.phonebook.server.dao;
 
-import java.util.List;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-import com.opensource.products.phonebook.server.domain.EmailTypeEntity;
+import com.tomholmes.springboot.phonebook.server.domain.EmailTypeEntity;
 
-public interface EmailTypeDao
+@Repository("emailTypeDao")
+public interface EmailTypeDao extends CrudRepository<EmailTypeEntity, Long>
 {
 
+    /*
     public EmailTypeEntity saveEmailTypeEntity(EmailTypeEntity emailType);
-
+    
     public void deleteEmailTypeEntity(Long emailTypeId);
-
+    
     public void deleteEmailTypeEntity(EmailTypeEntity emailType);
-
+    
     public List<EmailTypeEntity> getAllEmailTypeEntitys();
-
+    
     // Retrieve
     public EmailTypeEntity getEmailTypeEntity(long id);
-
+    
     public List<EmailTypeEntity> getEmailTypeEntity(EmailTypeEntity exampleEntity);
+    */
 
 }
