@@ -6,10 +6,12 @@ import static org.junit.Assert.assertNotNull;
 import java.util.Date;
 import java.util.List;
 
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.tomholmes.springboot.phonebook.server.domain.ContactEntity;
 import com.tomholmes.springboot.phonebook.server.domain.ContactPhoneEntity;
+import com.tomholmes.springboot.phonebook.server.domain.PhoneTypeEntity;
 
 public class ContactPhoneDaoTest extends BaseDaoTests
 {
@@ -42,25 +44,29 @@ public class ContactPhoneDaoTest extends BaseDaoTests
 
     private ContactEntity contact;
 
-    /*
     @Test
     public void testContactPhoneFetchByContact() throws Exception
     {
-        long contactId = 0; // should be no results for contactId=4
         System.out.println("testContactPhoneFetchByContact: START");
-    
-        List<ContactPhoneEntity> contactPhones = contactPhoneDao.getContactPhoneEntityByContactId(contactId);
-        if (contactPhones != null)
-        {
-            System.out.println("testContactPhoneFetchByContact: size=" + contactPhones.size());
-        }
-        assertEquals(0, contactPhones.size());
-    
+        // ==========================================================================
+        ContactEntity contact = new ContactEntity();
+        contact.setContactId(5);
+        List<ContactPhoneEntity> contactPhoneList = contactPhoneDao.findByContact(contact);
+        assertEquals(3, contactPhoneList.size());
+        // ==========================================================================
+        contact = new ContactEntity();
+        contact.setContactId(1);
+        contactPhoneList = contactPhoneDao.findByContact(contact);
+        assertEquals(0, contactPhoneList.size());
+        // ==========================================================================
+        contact = new ContactEntity();
+        contact.setContactId(11); // id does not exist
+        contactPhoneList = contactPhoneDao.findByContact(contact);
+        assertEquals(0, contactPhoneList.size());
+        // ==========================================================================
         System.out.println("testContactPhoneFetchByContact: FINISH");
     }
-    */
 
-    /*
     @Test
     public void testCreate() throws Exception
     {
@@ -84,7 +90,7 @@ public class ContactPhoneDaoTest extends BaseDaoTests
         System.out.println("testCreate: FINISH: CREATE");
         // =================================================================================
         System.out.println("testCreate: START");
-        List<ContactPhoneEntity> contactPhones = contactPhoneDao.getContactPhoneEntityByContactId(contactId);
+        List<ContactPhoneEntity> contactPhones = contactPhoneDao.findByContact(contact);
         if (contactPhones != null)
         {
             System.out.println("testCreate: size=" + contactPhones.size());
@@ -94,7 +100,6 @@ public class ContactPhoneDaoTest extends BaseDaoTests
         // =================================================================================
         // contactPhoneDao.deleteContactPhoneEntity(contactPhone);
     }
-    */
 
     // @Test
     public void testContactRetrieve()
