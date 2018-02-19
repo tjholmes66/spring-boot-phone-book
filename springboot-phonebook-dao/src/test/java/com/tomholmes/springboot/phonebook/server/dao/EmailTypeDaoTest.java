@@ -108,7 +108,7 @@ public class EmailTypeDaoTest extends BaseDaoTests
         EmailTypeEntity emailTypeGet;
         // =================================================================================
         // ***************************************************************
-        long id = 10;
+        long id = 4;
         emailType = emailTypeDao.findOne(id);
         emailTypeDao.delete(emailType);
         emailTypeGet = emailTypeDao.findOne(id);

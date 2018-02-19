@@ -257,7 +257,7 @@ public class ContactDaoTest extends BaseDaoTests
     public void testContactDelete()
     {
         System.out.println("testContactDelete: START");
-        long contactId = 13;
+        long contactId = 6;
         // =================================================================================
         // ContactEntity contactEntity = contactDao.getContactEntity(contactId);
         // assertNotNull(contactEntity);

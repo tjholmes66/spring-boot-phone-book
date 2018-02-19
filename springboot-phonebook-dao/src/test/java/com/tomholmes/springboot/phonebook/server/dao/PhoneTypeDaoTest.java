@@ -108,7 +108,7 @@ public class PhoneTypeDaoTest extends BaseDaoTests
         PhoneTypeEntity phoneTypeGet;
         // =================================================================================
         // ***************************************************************
-        long id = 10;
+        long id = 4;
         phoneType = phoneTypeDao.findOne(id);
         phoneTypeDao.delete(phoneType);
         phoneTypeGet = phoneTypeDao.findOne(id);

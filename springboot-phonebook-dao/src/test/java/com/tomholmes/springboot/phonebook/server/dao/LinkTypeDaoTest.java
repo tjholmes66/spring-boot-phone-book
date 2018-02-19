@@ -108,7 +108,7 @@ public class LinkTypeDaoTest extends BaseDaoTests
         LinkTypeEntity linkTypeGet;
         // =================================================================================
         // ***************************************************************
-        long id = 10;
+        long id = 1;
         linkType = linkTypeDao.findOne(id);
         linkTypeDao.delete(linkType);
         linkTypeGet = linkTypeDao.findOne(id);
