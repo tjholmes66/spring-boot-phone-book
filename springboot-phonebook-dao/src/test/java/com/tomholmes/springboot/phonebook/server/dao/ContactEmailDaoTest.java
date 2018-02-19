@@ -8,17 +8,12 @@ import java.util.List;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import com.tomholmes.springboot.phonebook.server.domain.ContactEmailEntity;
 import com.tomholmes.springboot.phonebook.server.domain.ContactEntity;
 
 public class ContactEmailDaoTest extends BaseDaoTests
 {
-
-    @Autowired
-    private TestEntityManager entityManager;
-
     @Autowired
     private ContactDao contactDao;
     @Autowired
