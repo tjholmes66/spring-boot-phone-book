@@ -120,24 +120,29 @@ public class ContactDaoTest extends BaseDaoTests
         return phones;
     }
 
-    // @Test
-    /*
+    @Test
     public void testContactFetchByUser() throws Exception
     {
         System.out.println("testContactFetchByUser: START");
         UserEntity user = new UserEntity();
         user.setUserId(1);
-    
-        List<ContactEntity> contacts = contactDao.getContactEntityByUser(user);
-        if (contacts != null)
-        {
-            System.out.println("testContactFetchByUser: size=" + contacts.size());
-        }
-        assertNotNull(contacts);
-    
+
+        List<ContactEntity> contactList = contactDao.findByUser(user);
+        assertNotNull(contactList);
+        assertEquals(1, contactList.size());
+
+        user = new UserEntity();
+        user.setUserId(2);
+        contactList = contactDao.findByUser(user);
+        assertEquals(2, contactList.size());
+
+        user = new UserEntity();
+        user.setUserId(3);
+        contactList = contactDao.findByUser(user);
+        assertEquals(2, contactList.size());
+
         System.out.println("testContactFetchByUser: FINISH");
     }
-    */
 
     @Test
     public void testContactCreate() throws Exception

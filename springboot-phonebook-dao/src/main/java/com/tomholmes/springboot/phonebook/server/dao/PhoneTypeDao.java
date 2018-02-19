@@ -9,19 +9,4 @@ import com.tomholmes.springboot.phonebook.server.domain.PhoneTypeEntity;
 public interface PhoneTypeDao extends CrudRepository<PhoneTypeEntity, Long>
 {
 
-    /*
-    public PhoneTypeEntity savePhoneTypeEntity(PhoneTypeEntity phoneType);
-    
-    public void deletePhoneTypeEntity(Long phoneTypeId);
-    
-    public void deletePhoneTypeEntity(PhoneTypeEntity phoneType);
-    
-    public List<PhoneTypeEntity> getAllPhoneTypeEntitys();
-    
-    // Retrieve
-    public PhoneTypeEntity getPhoneTypeEntity(long id);
-    
-    public List<PhoneTypeEntity> getPhoneTypeEntity(PhoneTypeEntity exampleEntity);
-    */
-
 }
