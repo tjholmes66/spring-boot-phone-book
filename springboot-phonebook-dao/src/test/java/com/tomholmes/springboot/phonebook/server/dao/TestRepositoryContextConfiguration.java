@@ -7,7 +7,7 @@ import org.springframework.context.annotation.PropertySource;
 @SpringBootApplication
 @PropertySource(value = "classpath:application.properties")
 @EntityScan("com.tomholmes.springboot.phonebook.server.domain")
-public class TestContextConfiguration
+public class TestRepositoryContextConfiguration
 {
 
 }

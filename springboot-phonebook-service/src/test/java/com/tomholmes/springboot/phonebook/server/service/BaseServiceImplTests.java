@@ -1,4 +1,4 @@
-package com.tomholmes.springboot.phonebook.server.dao;
+package com.tomholmes.springboot.phonebook.server.service;
 
 import static org.junit.Assert.assertEquals;
 
@@ -12,10 +12,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = TestRepositoryContextConfiguration.class)
+@SpringBootTest(classes = TestServiceContextConfiguration.class)
 @ComponentScan("com.tomholmes.springboot.phonebook.server")
 @Transactional
-public class BaseDaoTests
+public class BaseServiceImplTests
 {
     private SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 
