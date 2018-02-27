@@ -3,6 +3,7 @@ package com.tomholmes.springboot.phonebook.server.util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,14 +12,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class SendEmailServiceImpl implements SendEmailService
 {
     @Autowired
-    private MailSender mailSender;
-
+    private JavaMailSender mailSender;
+    
     public MailSender getMailSender()
     {
         return mailSender;
     }
 
-    public void setMailSender(MailSender mailSender)
+    public void setMailSender(JavaMailSender mailSender)
     {
         this.mailSender = mailSender;
     }

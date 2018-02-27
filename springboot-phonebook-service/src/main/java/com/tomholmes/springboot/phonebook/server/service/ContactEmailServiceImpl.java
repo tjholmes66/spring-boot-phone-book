@@ -16,7 +16,7 @@ public class ContactEmailServiceImpl implements ContactEmailService
 {
     @Autowired
     private ContactEmailDao contactEmailDao;
-
+    
     @Override
     public List<ContactEmailEntity> getAllEmailsByContactId(long contactId)
     {

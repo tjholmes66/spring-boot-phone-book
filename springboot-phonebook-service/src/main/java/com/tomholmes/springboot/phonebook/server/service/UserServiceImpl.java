@@ -15,6 +15,7 @@ public class UserServiceImpl implements UserService
 {
     @Autowired
     private UserDao userDao;
+    
 
     @Override
     public List<UserEntity> getAllUsers()

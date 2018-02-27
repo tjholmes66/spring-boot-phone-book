@@ -16,7 +16,7 @@ public class ContactServiceImpl implements ContactService
 {
     @Autowired
     private ContactDao contactDao;
-
+    
     @Override
     public List<ContactEntity> getAllContacts()
     {
@@ -60,4 +60,6 @@ public class ContactServiceImpl implements ContactService
         System.out.println("remove: contactId=" + contactId);
         contactDao.delete(contactId);
     }
+    
+    
 }

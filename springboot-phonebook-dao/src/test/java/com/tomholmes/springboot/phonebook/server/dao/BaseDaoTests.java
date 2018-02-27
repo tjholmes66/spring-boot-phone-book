@@ -11,8 +11,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tomholmes.springboot.phonebook.server.RepositoryContextConfiguration;
+
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = TestRepositoryContextConfiguration.class)
+@SpringBootTest(classes = RepositoryContextConfiguration.class)
 @ComponentScan("com.tomholmes.springboot.phonebook.server")
 @Transactional
 public class BaseDaoTests
