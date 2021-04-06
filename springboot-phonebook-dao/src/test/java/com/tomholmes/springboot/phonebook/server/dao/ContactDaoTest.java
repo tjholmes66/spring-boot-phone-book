@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -232,7 +233,7 @@ public class ContactDaoTest extends BaseDaoTests
         // =================================================================================
         // ***************************************************************
         System.out.println("testContactRetrieveById: START: CREATE");
-        ContactEntity contact = contactDao.findOne(contactId);
+        ContactEntity contact = contactDao.getOne(contactId);
         assertNotNull(contact.getContactId());
         // ************************************************************
         assertEquals(contact.getAddress1(), address1);
@@ -268,10 +269,10 @@ public class ContactDaoTest extends BaseDaoTests
         // assertNotNull(contactEntity);
         // System.out.println("testContactDelete: " + contactEntity.toString());
         // =================================================================================
-        contactDao.delete(contactId);
+        contactDao.deleteById(contactId);
         System.out.println("testContactDelete: contact deleted");
         // =================================================================================
-        ContactEntity contact = contactDao.findOne(contactId);
+        Optional<ContactEntity> contact = contactDao.findById(contactId);
         assertEquals(contact, null);
         // ***************************************************************
         System.out.println("testContactDelete: FINISH");
@@ -341,7 +342,7 @@ public class ContactDaoTest extends BaseDaoTests
         String updatePassword = "updated_pwd4";
         String updateUsername = "updated_username4";
         // =================================================================================
-        ContactEntity contact = contactDao.findOne(contactId);
+        ContactEntity contact = contactDao.getOne(contactId);
 // assertEquals(contact.getAddress1(),address1);
 // assertEquals(contact.getAddress2(),address2);
 // assertEquals(contact.getCity(),city);

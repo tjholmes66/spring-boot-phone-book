@@ -74,7 +74,7 @@ public class ContactPhoneDaoTest extends BaseDaoTests
         // =================================================================================
         PhoneTypeEntity phoneType = new PhoneTypeEntity();
         phoneType.setId(phoneTypeId);
-        contact = contactDao.findOne(contactId);
+        contact = contactDao.getOne(contactId);
         // =================================================================================
         ContactPhoneEntity contactPhone = new ContactPhoneEntity();
         // contactPhone.setId(id);
@@ -133,7 +133,7 @@ public class ContactPhoneDaoTest extends BaseDaoTests
         // =================================================================================
         // ***************************************************************
         System.out.println("testContactRetrieveById: START: CREATE");
-        ContactPhoneEntity contactPhone = contactPhoneDao.findOne(id);
+        ContactPhoneEntity contactPhone = contactPhoneDao.getOne(id);
         assertNotNull(contactPhone.getPhoneId());
         // ************************************************************
         assertNotNull(contactPhone.getPhoneId());
@@ -157,9 +157,9 @@ public class ContactPhoneDaoTest extends BaseDaoTests
         // =================================================================================
         // ***************************************************************
         long id = 10;
-        contactPhone = contactPhoneDao.findOne(id);
+        contactPhone = contactPhoneDao.getOne(id);
         contactPhoneDao.delete(contactPhone);
-        contactPhoneGet = contactPhoneDao.findOne(id);
+        contactPhoneGet = contactPhoneDao.getOne(id);
         assertEquals(null, contactPhoneGet);
         // ***************************************************************
         System.out.println("testContactDelete: FINISH: CREATE");
@@ -228,7 +228,7 @@ public class ContactPhoneDaoTest extends BaseDaoTests
         String updatePassword = "updated_pwd";
         String updateUsername = "updated_username";
         // =================================================================================
-        ContactPhoneEntity contactPhone = contactPhoneDao.findOne(id);
+        ContactPhoneEntity contactPhone = contactPhoneDao.getOne(id);
 // assertEquals(contactPhone.getAddress1(),address1);
 // assertEquals(contactPhone.getAddress2(),address2);
 // assertEquals(contactPhone.getCity(),city);

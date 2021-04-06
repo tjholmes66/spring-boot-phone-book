@@ -90,7 +90,7 @@ public class EmailTypeDaoTest extends BaseDaoTests
         // =================================================================================
         // ***************************************************************
         System.out.println("testEmailTypeRetrieveById: START: CREATE");
-        EmailTypeEntity emailType = emailTypeDao.findOne(1L);
+        EmailTypeEntity emailType = emailTypeDao.getOne(1L);
         assertNotNull(emailType.getId());
         assertNotNull(emailType.isActive());
         assertNotNull(emailType.getDescription());
@@ -109,9 +109,9 @@ public class EmailTypeDaoTest extends BaseDaoTests
         // =================================================================================
         // ***************************************************************
         long id = 4;
-        emailType = emailTypeDao.findOne(id);
+        emailType = emailTypeDao.getOne(id);
         emailTypeDao.delete(emailType);
-        emailTypeGet = emailTypeDao.findOne(id);
+        emailTypeGet = emailTypeDao.getOne(id);
         assertEquals(null, emailTypeGet);
         // ***************************************************************
         System.out.println("testEmailTypeDelete: FINISH: CREATE");

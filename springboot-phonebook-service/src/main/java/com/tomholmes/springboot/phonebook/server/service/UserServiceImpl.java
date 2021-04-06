@@ -15,7 +15,6 @@ public class UserServiceImpl implements UserService
 {
     @Autowired
     private UserDao userDao;
-    
 
     @Override
     public List<UserEntity> getAllUsers()
@@ -27,7 +26,7 @@ public class UserServiceImpl implements UserService
     @Override
     public UserEntity getUserById(long userId)
     {
-        UserEntity userEntity = userDao.findOne(userId);
+        UserEntity userEntity = userDao.getOne(userId);
         return userEntity;
     }
 
@@ -41,13 +40,13 @@ public class UserServiceImpl implements UserService
     @Override
     public void remove(UserEntity userEntity)
     {
-        userDao.delete(userEntity.getUserId());
+        userDao.deleteById(userEntity.getUserId());
     }
 
     @Override
     public void remove(long userId)
     {
-        userDao.delete(userId);
+        userDao.deleteById(userId);
     }
 
     @Override

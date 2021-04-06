@@ -36,7 +36,7 @@ public class ContactEmailServiceImpl implements ContactEmailService
     @Override
     public ContactEmailEntity getEmailContactById(long emailId)
     {
-        ContactEmailEntity contactEmailEntity = contactEmailDao.findOne(emailId);
+        ContactEmailEntity contactEmailEntity = contactEmailDao.getOne(emailId);
         return contactEmailEntity;
     }
 }

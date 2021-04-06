@@ -90,7 +90,7 @@ public class LinkTypeDaoTest extends BaseDaoTests
         // =================================================================================
         // ***************************************************************
         System.out.println("testLinkTypeRetrieveById: START: CREATE");
-        LinkTypeEntity linkType = linkTypeDao.findOne(1L);
+        LinkTypeEntity linkType = linkTypeDao.getOne(1L);
         assertNotNull(linkType.getId());
         assertNotNull(linkType.isActive());
         assertNotNull(linkType.getDescription());
@@ -109,9 +109,9 @@ public class LinkTypeDaoTest extends BaseDaoTests
         // =================================================================================
         // ***************************************************************
         long id = 1;
-        linkType = linkTypeDao.findOne(id);
+        linkType = linkTypeDao.getOne(id);
         linkTypeDao.delete(linkType);
-        linkTypeGet = linkTypeDao.findOne(id);
+        linkTypeGet = linkTypeDao.getOne(id);
         assertEquals(null, linkTypeGet);
         // ***************************************************************
         System.out.println("testLinkTypeDelete: FINISH: CREATE");

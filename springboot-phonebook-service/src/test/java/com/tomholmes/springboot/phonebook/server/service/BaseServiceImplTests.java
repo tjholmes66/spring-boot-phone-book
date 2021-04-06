@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tomholmes.springboot.phonebook.server.ServiceContextConfiguration;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes=ServiceContextConfiguration.class)
+@SpringBootTest(classes = ServiceContextConfiguration.class)
 @Transactional
 public class BaseServiceImplTests
 {

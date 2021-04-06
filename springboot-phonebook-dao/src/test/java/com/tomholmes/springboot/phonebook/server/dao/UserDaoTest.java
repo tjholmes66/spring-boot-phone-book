@@ -123,7 +123,7 @@ public class UserDaoTest extends BaseDaoTests
         // =================================================================================
         // ***************************************************************
         System.out.println("testUserRetrieveById: START: CREATE");
-        UserEntity user = userDao.findOne(id);
+        UserEntity user = userDao.getOne(id);
         assertNotNull(user.getUserId());
         // assertNotNull(user.isActive());
         // ************************************************************
@@ -265,12 +265,12 @@ public class UserDaoTest extends BaseDaoTests
         System.out.println("testUserDelete: START");
         long id = 3;
         // =================================================================================
-        UserEntity user = userDao.findOne(id);
+        UserEntity user = userDao.getOne(id);
         assertNotNull(user);
         System.out.println("testUserDelete: " + user.toString());
         userDao.delete(user);
         System.out.println("testUserDelete: user deleted");
-        user = userDao.findOne(id);
+        user = userDao.getOne(id);
         assertEquals(user, null);
         // ***************************************************************
         System.out.println("testUserDelete: FINISH");
@@ -333,7 +333,7 @@ public class UserDaoTest extends BaseDaoTests
     {
         System.out.println("testUserUpdate: START");
         long userId = 2;
-        UserEntity userEntity = userDao.findOne(userId);
+        UserEntity userEntity = userDao.getOne(userId);
         assertNotNull(userEntity);
         // =================================================================================
         String updateFirstName = "updated_fn4";
@@ -346,7 +346,7 @@ public class UserDaoTest extends BaseDaoTests
         // =================================================================================
         userDao.save(userEntity);
         // =================================================================================
-        userEntity = userDao.findOne(userId);
+        userEntity = userDao.getOne(userId);
         assertEquals(updateFirstName, userEntity.getFirstname());
         assertEquals(updateLastName, userEntity.getLastname());
         assertEquals(updateEmail, userEntity.getEmail());

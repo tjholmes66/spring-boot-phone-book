@@ -73,7 +73,7 @@ public class ContactEmailDaoTest extends BaseDaoTests
         // =================================================================================
         EmailTypeEntity emailType = new EmailTypeEntity();
         emailType.setId(emailTypeId);
-        contact = contactDao.findOne(id);
+        contact = contactDao.getOne(id);
         // =================================================================================
         ContactEmailEntity contactEmail = new ContactEmailEntity();
         // contactEmail.setId(id);
@@ -125,7 +125,7 @@ public class ContactEmailDaoTest extends BaseDaoTests
         // =================================================================================
         // ***************************************************************
         System.out.println("testContactRetrieveById: START: CREATE");
-        ContactEmailEntity contactEmail = contactEmailDao.findOne(id);
+        ContactEmailEntity contactEmail = contactEmailDao.getOne(id);
         assertNotNull(contactEmail.getEmailId());
         // ************************************************************
         assertNotNull(contactEmail.getEmailId());
@@ -149,9 +149,9 @@ public class ContactEmailDaoTest extends BaseDaoTests
         // =================================================================================
         // ***************************************************************
         long id = 10;
-        contactEmail = contactEmailDao.findOne(id);
+        contactEmail = contactEmailDao.getOne(id);
         contactEmailDao.delete(contactEmail);
-        contactEmailGet = contactEmailDao.findOne(id);
+        contactEmailGet = contactEmailDao.getOne(id);
         assertEquals(null, contactEmailGet);
         // ***************************************************************
         System.out.println("testContactDelete: FINISH: CREATE");
@@ -220,7 +220,7 @@ public class ContactEmailDaoTest extends BaseDaoTests
         String updatePassword = "updated_pwd";
         String updateUsername = "updated_username";
         // =================================================================================
-        ContactEmailEntity contactEmail = contactEmailDao.findOne(id);
+        ContactEmailEntity contactEmail = contactEmailDao.getOne(id);
 // assertEquals(contactEmail.getAddress1(),address1);
 // assertEquals(contactEmail.getAddress2(),address2);
 // assertEquals(contactEmail.getCity(),city);
