@@ -16,8 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.restdocs.JUnitRestDocumentation;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -140,7 +142,7 @@ public class BaseControllerTests extends TestCase
 
     public User createAuthenticatedUser1(long userId)
     {
-        UserEntity userEntity = userRepo.getById(userId);
+        UserEntity userEntity = userRepo.findById(userId).orElse(null);
         User user = null;
         return user;
     }
