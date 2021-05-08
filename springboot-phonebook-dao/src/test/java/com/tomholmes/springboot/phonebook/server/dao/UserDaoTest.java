@@ -1,18 +1,30 @@
 package com.tomholmes.springboot.phonebook.server.dao;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.Date;
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.tomholmes.springboot.phonebook.server.RepositoryContextConfiguration;
 import com.tomholmes.springboot.phonebook.server.domain.PositionEntity;
 import com.tomholmes.springboot.phonebook.server.domain.UserEntity;
 
-public class UserDaoTest extends BaseDaoTests
+@ExtendWith(SpringExtension.class)
+@SpringBootTest(classes = RepositoryContextConfiguration.class)
+@ComponentScan("com.tomholmes.springboot.phonebook.server")
+@PropertySource(value = "classpath:application.properties")
+@Transactional
+public class UserDaoTest
 {
     @Autowired
     private ContactDao contactDao;

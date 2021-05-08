@@ -9,19 +9,16 @@ import java.time.format.DateTimeFormatter;
 
 import javax.servlet.Filter;
 
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpSession;
-import org.springframework.restdocs.JUnitRestDocumentation;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -35,12 +32,9 @@ import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import com.tomholmes.springboot.phonebook.server.dao.UserDao;
 import com.tomholmes.springboot.phonebook.server.domain.UserEntity;
 
-import junit.framework.TestCase;
-
-@RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @Transactional
-public class BaseControllerTests extends TestCase
+public class BaseControllerTests
 {
     public final static String BASE_URL = "http://localhost:8080/";
 
@@ -61,10 +55,7 @@ public class BaseControllerTests extends TestCase
 
     protected MockHttpSession session;
 
-    @Rule
-    public JUnitRestDocumentation restDocumentation = new JUnitRestDocumentation();
-
-    @Before
+    @BeforeAll
     public void setUp()
     {
         this.session = new MockHttpSession();
@@ -79,11 +70,10 @@ public class BaseControllerTests extends TestCase
     // ================================================================================================
     // ================================================================================================
 
-    @Override
+    @AfterAll
     public void tearDown() throws Exception
     {
         System.out.println("tearDown: START");
-        super.tearDown();
         System.out.println("tearDown: FINISH");
     }
 

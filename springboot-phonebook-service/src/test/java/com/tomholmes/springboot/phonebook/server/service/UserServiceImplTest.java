@@ -1,11 +1,13 @@
 package com.tomholmes.springboot.phonebook.server.service;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.tomholmes.springboot.phonebook.server.domain.PositionEntity;
@@ -18,13 +20,13 @@ public class UserServiceImplTest extends BaseServiceImplTests
     @Autowired
     private UserService service;
 
-    @org.junit.Before
+    @BeforeAll
     public void setUp() throws Exception
     {
         System.out.println("setUp: service: " + service);
     }
 
-    @org.junit.After
+    @AfterAll
     public void tearDown()
     {
         service = null;
