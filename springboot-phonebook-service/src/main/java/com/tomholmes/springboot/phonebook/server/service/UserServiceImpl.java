@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService
     @Override
     public UserEntity getUserById(long userId)
     {
-        UserEntity userEntity = userDao.getOne(userId);
+        UserEntity userEntity = userDao.findById(userId).orElse(null);
         return userEntity;
     }
 

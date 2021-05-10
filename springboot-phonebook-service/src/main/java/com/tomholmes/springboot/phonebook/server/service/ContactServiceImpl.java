@@ -36,7 +36,7 @@ public class ContactServiceImpl implements ContactService
     @Override
     public ContactEntity getContactById(long contactId)
     {
-        ContactEntity contactEntity = contactDao.getOne(contactId);
+        ContactEntity contactEntity = contactDao.findById(contactId).orElse(null);
         return contactEntity;
     }
 

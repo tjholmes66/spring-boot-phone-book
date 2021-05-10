@@ -7,11 +7,12 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 
-import javax.servlet.Filter;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,6 +20,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -29,11 +31,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
+import com.tomholmes.springboot.phonebook.server.ServiceContextConfiguration;
 import com.tomholmes.springboot.phonebook.server.dao.UserDao;
 import com.tomholmes.springboot.phonebook.server.domain.UserEntity;
 
-@WebAppConfiguration
+@ExtendWith(SpringExtension.class)
+@SpringBootTest(classes = ServiceContextConfiguration.class)
+@ComponentScan("com.tomholmes.springboot.phonebook.server")
 @Transactional
+@WebAppConfiguration
 public class BaseControllerTests
 {
     public final static String BASE_URL = "http://localhost:8080/";
@@ -48,9 +54,6 @@ public class BaseControllerTests
     @Autowired
     protected WebApplicationContext context;
 
-    @Autowired
-    protected Filter springSecurityFilterChain;
-
     protected MockMvc mockMvc;
 
     protected MockHttpSession session;
@@ -63,7 +66,7 @@ public class BaseControllerTests
         // _customUser4001 = createAuthenticatedUser1(_customUserId4001);
         // _customUser5001 = createAuthenticatedUser1(_customUserId5001);
         // _customUser1001 = createAuthenticatedUser1(_customUserId1001);
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(context).addFilters(springSecurityFilterChain).build();
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
 
     }
 

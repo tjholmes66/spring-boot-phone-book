@@ -5,6 +5,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.Date;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -100,6 +101,7 @@ public class ContactControllerTest extends BaseControllerTests
 
     // @RequestMapping(value = "", method = RequestMethod.GET, headers = "Accept=application/json")
     // public ArrayList<ContactEntity> getContactList1()
+    @Test
     public void testGetContactList1() throws Exception
     {
         System.out.println("testGetContactList1: START");
@@ -110,6 +112,7 @@ public class ContactControllerTest extends BaseControllerTests
 
     // @RequestMapping(value = "/", method = RequestMethod.GET, headers = "Accept=application/json")
     // public @ResponseBody ArrayList<ContactEntity> getContactList2()
+    @Test
     public void testGetContactList2() throws Exception
     {
         System.out.println("testGetContactList2: START");
@@ -121,10 +124,11 @@ public class ContactControllerTest extends BaseControllerTests
     // @RequestMapping(value = "/contactId/{contactId}", method = RequestMethod.GET, headers =
     // "Accept=application/json")
     // public @ResponseBody ContactEntity getContactById(@PathVariable("contactId") long contactId)
+    @Test
     public void testGetContactById() throws Exception
     {
         System.out.println("testGetContactById: START");
-        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get(BASE_URL + "/contactId/1");
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get(BASE_URL + "/contactId/6");
         this.mockMvc.perform(requestBuilder).andDo(print()).andExpect(status().isOk());
         System.out.println("testGetContactById: FINISH");
     }
