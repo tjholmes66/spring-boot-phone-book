@@ -104,16 +104,13 @@ public class LinkTypeDaoTest extends BaseDaoTests
     {
         System.out.println("testLinkTypeDelete: START");
         // =================================================================================
-        LinkTypeEntity linkType;
-        LinkTypeEntity linkTypeGet;
-        // =================================================================================
-        // ***************************************************************
-        long id = 1;
-        linkType = linkTypeDao.getOne(id);
+        long linkTypeId = 1;
+        LinkTypeEntity linkType = linkTypeDao.findById(linkTypeId).orElse(null);
         linkTypeDao.delete(linkType);
-        linkTypeGet = linkTypeDao.getOne(id);
+
+        LinkTypeEntity linkTypeGet = linkTypeDao.findById(linkTypeId).orElse(null);
         assertEquals(null, linkTypeGet);
-        // ***************************************************************
+
         System.out.println("testLinkTypeDelete: FINISH: CREATE");
         // =================================================================================
     }

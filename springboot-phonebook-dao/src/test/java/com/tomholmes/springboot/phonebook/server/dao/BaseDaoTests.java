@@ -1,10 +1,7 @@
 package com.tomholmes.springboot.phonebook.server.dao;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.text.SimpleDateFormat;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
@@ -21,10 +18,12 @@ public class BaseDaoTests
 {
     private SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 
+    /*
     @Test
     public void test()
     {
         assertEquals(true, true);
     }
+    */
 
 }

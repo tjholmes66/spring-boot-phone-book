@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -272,7 +271,7 @@ public class ContactDaoTest extends BaseDaoTests
         contactDao.deleteById(contactId);
         System.out.println("testContactDelete: contact deleted");
         // =================================================================================
-        Optional<ContactEntity> contact = contactDao.findById(contactId);
+        ContactEntity contact = contactDao.findById(contactId).orElse(null);
         assertEquals(contact, null);
         // ***************************************************************
         System.out.println("testContactDelete: FINISH");

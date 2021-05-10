@@ -104,16 +104,13 @@ public class PhoneTypeDaoTest extends BaseDaoTests
     {
         System.out.println("testPhoneTypeDelete: START");
         // =================================================================================
-        PhoneTypeEntity phoneType;
-        PhoneTypeEntity phoneTypeGet;
-        // =================================================================================
-        // ***************************************************************
-        long id = 4;
-        phoneType = phoneTypeDao.getOne(id);
+        long phoneTypeId = 4;
+        PhoneTypeEntity phoneType = phoneTypeDao.findById(phoneTypeId).orElse(null);
         phoneTypeDao.delete(phoneType);
-        phoneTypeGet = phoneTypeDao.getOne(id);
+
+        PhoneTypeEntity phoneTypeGet = phoneTypeDao.findById(phoneTypeId).orElse(null);
         assertEquals(null, phoneTypeGet);
-        // ***************************************************************
+
         System.out.println("testPhoneTypeDelete: FINISH: CREATE");
         // =================================================================================
     }

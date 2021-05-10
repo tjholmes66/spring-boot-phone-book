@@ -9,8 +9,8 @@ import java.time.format.DateTimeFormatter;
 
 import javax.servlet.Filter;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -55,7 +55,7 @@ public class BaseControllerTests
 
     protected MockHttpSession session;
 
-    @BeforeAll
+    @BeforeEach
     public void setUp()
     {
         this.session = new MockHttpSession();
@@ -70,7 +70,7 @@ public class BaseControllerTests
     // ================================================================================================
     // ================================================================================================
 
-    @AfterAll
+    @AfterEach
     public void tearDown() throws Exception
     {
         System.out.println("tearDown: START");

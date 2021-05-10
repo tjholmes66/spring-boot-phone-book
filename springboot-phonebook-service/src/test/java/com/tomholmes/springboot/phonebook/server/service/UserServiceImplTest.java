@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,13 +20,13 @@ public class UserServiceImplTest extends BaseServiceImplTests
     @Autowired
     private UserService service;
 
-    @BeforeAll
+    @BeforeEach
     public void setUp() throws Exception
     {
         System.out.println("setUp: service: " + service);
     }
 
-    @AfterAll
+    @AfterEach
     public void tearDown()
     {
         service = null;
